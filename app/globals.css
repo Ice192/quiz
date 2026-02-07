@@ -3,13 +3,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --accent: #22d3ee;
+  --accent-strong: #67e8f9;
+  --panel: rgba(255, 255, 255, 0.04);
+  --panel-border: rgba(34, 211, 238, 0.2);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-oxanium);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +26,83 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-oxanium), sans-serif;
+  background-color: #07090d;
+  background-image:
+    radial-gradient(1200px 600px at 10% -10%, rgba(34, 211, 238, 0.18), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(103, 232, 249, 0.12), transparent 55%),
+    radial-gradient(700px 400px at 50% 110%, rgba(14, 116, 144, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(8, 12, 20, 0.92), rgba(6, 8, 14, 0.98));
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+* {
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes softFloat {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(103, 232, 249, 0);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(103, 232, 249, 0.5);
+  }
+}
+
+.fx-fade-up {
+  animation: fadeUp 500ms ease-out both;
+}
+
+.fx-fade-up-delayed {
+  animation: fadeUp 600ms ease-out 120ms both;
+}
+
+.fx-float {
+  animation: softFloat 6s ease-in-out infinite;
+}
+
+.fx-glow-hover {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.fx-glow-hover:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 0 30px rgba(103, 232, 249, 0.45);
+}
+
+.fx-pulse-urgent {
+  animation: pulseGlow 1.3s ease-in-out infinite;
 }
